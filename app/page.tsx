@@ -1,95 +1,43 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { AppWrapper, ContentWrraper,Header,BoxContent, Box,BoxWrapper, BoxText, Button, CustomBill } from "@/components/app.styled.component";
+import { useState } from "react";
 
 export default function Home() {
+  const [price,setPrice]=useState(0);
+  const objekat=[
+    {drink:"mojito",price:3},
+    {drink:"Beer",price:1},
+    {drink:"Red Wine",price:1},
+    {drink:"Gin Tonic",price:1},
+    {drink:"White Wine",price:1},
+    {drink:"Tequila Shot",price:1},
+
+  ]
+  const handlerButton=(pricee:number)=>{
+    setPrice(price+pricee);
+  }
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+   <AppWrapper>
+    <ContentWrraper>
+      <Header>
+        React Bar
+      </Header>
+      <BoxWrapper>
+        {objekat.map((obj,index)=>{
+          return(
+          <Box key={index}>
+            <BoxContent>
+            <BoxText>{obj.drink}</BoxText>
+            <BoxText>{obj.price}</BoxText>
+            <Button onClick={()=>handlerButton(obj.price)}>Order drink</Button>
+            </BoxContent>
+        </Box>
+          )
+        })}
+      </BoxWrapper>
+      <CustomBill> Bill is {price}$</CustomBill>
+    </ContentWrraper>
+   </AppWrapper>
+    
   );
 }
